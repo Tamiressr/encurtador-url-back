@@ -1,5 +1,6 @@
 package com.logique.desafio.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,6 @@ import com.logique.desafio.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	@Query("FROM Url u  WHERE u.usuario.id= :id")
-	public List<Url> returnUrls(@Param("id") int id);
+	@Query(value="SELECT u.* FROM  url u, usuario_urls uu  where uu.urls_id=u.id  and uu.usuario_id=:id",nativeQuery=true )
+	public ArrayList<Url> returnUrls(@Param("id") int id);
 }

@@ -28,10 +28,6 @@ public class Url implements Serializable {
 	private Integer id;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date data;
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
 	private String url;
 	private String urlEncurtada;
 
@@ -43,7 +39,6 @@ public class Url implements Serializable {
 		super();
 		this.id = id;
 		this.data = data;
-		this.usuario = user;
 		this.url = url;
 		this.urlEncurtada = urlEncurtada;
 	}
@@ -51,7 +46,6 @@ public class Url implements Serializable {
 	public Url(Url url) {
 		this.id = url.getId();
 		this.data = url.getData();
-		this.usuario = url.getUser();
 		this.url = url.getUrl();
 		this.urlEncurtada = url.getUrlEncurtada();
 	}
@@ -72,14 +66,7 @@ public class Url implements Serializable {
 		this.data = data;
 	}
 
-	public Usuario getUser() {
-		return usuario;
-	}
-
-	public void setUser(Usuario user) {
-		this.usuario = user;
-	}
-
+	
 	public String getUrl() {
 		return url;
 	}
@@ -104,7 +91,6 @@ public class Url implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		result = prime * result + ((urlEncurtada == null) ? 0 : urlEncurtada.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -137,11 +123,7 @@ public class Url implements Serializable {
 				return false;
 		} else if (!urlEncurtada.equals(other.urlEncurtada))
 			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
+		
 		return true;
 	}
 

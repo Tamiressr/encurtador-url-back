@@ -33,7 +33,7 @@ public class URLService {
 		if (EncurtadorURL.urlValida(url.getUrl())) {
 			try {
 				url.setUrlEncurtada(EncurtadorURL.convertToShortUrl((url.getUrl())));
-				url.setUser(url.getUser());
+				//url.setUser(url.getUser());
 				url.setData(new Date());
 				url = urlRepository.save(url);
 				

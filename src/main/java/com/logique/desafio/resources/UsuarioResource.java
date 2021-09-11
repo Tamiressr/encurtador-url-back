@@ -1,5 +1,6 @@
 package com.logique.desafio.resources;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.logique.desafio.domain.Url;
 import com.logique.desafio.domain.Usuario;
 import com.logique.desafio.services.UsuarioService;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioResource {
@@ -49,10 +50,9 @@ public class UsuarioResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Usuario> insert(@Valid @RequestBody Usuario user) {
 
-		System.out.println(user.getUrls());
-		Usuario usuarioNovo = usuarioService.insert(user);
-		System.out.println(usuarioNovo.getUrls().isEmpty());
-		return ResponseEntity.ok().body(usuarioNovo);
+	
+		Usuario u=usuarioService.insert(user);
+		return ResponseEntity.ok().body(u);
 
 	}
 
@@ -75,18 +75,18 @@ public class UsuarioResource {
 
 
 	@RequestMapping(value = "/{id}/urls", method = RequestMethod.GET)
-	public ResponseEntity<List<Url>> findUrls(@PathVariable("id") int id) {
+	public ResponseEntity<ArrayList<Url>> findUrls(@PathVariable("id") int id) {
 
 		List<Url> list = usuarioService.findUrls(id);
 
-		List<Url> listURL = list.stream().map(obj -> new Url(obj)).collect(Collectors.toList());
+		ArrayList<Url> listURL = (ArrayList<Url>) list.stream().map(obj -> new Url(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listURL);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Url> insertUrl(@Valid @RequestBody Usuario usuario, String url) throws Exception {
-
-		Url obj = usuarioService.encurtarUrl(usuario, url);
+	public ResponseEntity<Url> insertUrl(@Valid @RequestBody Usuario usuario) throws Exception {
+String urlOriginal=usuario.getUrls().get( usuario.getUrls().size()-1).getUrl();
+		Url obj = usuarioService.encurtarUrl(usuario,  urlOriginal);
 		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
 
 	}

@@ -39,12 +39,23 @@ public class UsuarioService {
 	}
 
 	public List<Url> findUrls(@Param("id") int usuario) {
-		return usuarioRepository.returnUrls(usuario);
+		Usuario u= find(usuario);
+		//ArrayList<Url>
+		return u.getUrls();
 	}
 	public Usuario insert(Usuario user) {
-		user.setId(null);
-		urlRepository.saveAll(user.getUrls());
-		user=usuarioRepository.save(user);
+		
+	List<Url>urls=new ArrayList<Url>();
+		for(Url u:user.getUrls()) {
+			try {
+				urls.add(this.shortUrl( u.getUrl()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		user.setUrls((ArrayList<Url>) urls);
+		usuarioRepository.save(user);
 		return user;
 	}
 
@@ -70,17 +81,18 @@ public class UsuarioService {
 	
 
 	public Url encurtarUrl(Usuario usuario, String url) throws Exception {
+		
 		Usuario user = usuarioRepository.getById(usuario.getId());
 		Url u = new Url();
 		if (EncurtadorURL.urlValida(url)) {
 			try {
 				u.setUrlEncurtada(EncurtadorURL.convertToShortUrl(url));
 				u.setUrl(url);
-				u.setUser(user);
+			//	u.setUser(user);
 				u.setData(new Date());
 				user.adicionaUrl(u);
 				usuarioRepository.save(user);
-				urlRepository.save(u);
+				//urlRepository.save(u);
 			} catch (Exception e) {
 				throw new Exception("Erro ao tentar salvar url em usuário", e);
 			}
@@ -89,6 +101,32 @@ public class UsuarioService {
 		return u;
 
 	}
+	
+public Url shortUrl(String url) throws Exception {
+		
+		//Usuario user = usuarioRepository.getById(usuario.getId());
+		Url u = new Url();
+		if (EncurtadorURL.urlValida(url)) {
+			try {
+				u.setUrlEncurtada(EncurtadorURL.convertToShortUrl(url));
+				u.setUrl(url);
+			//	u.setUser(user);
+				u.setData(new Date());
+				//user.adicionaUrl(u);
+				//usuarioRepository.save(user);
+				//urlRepository.save(u);
+			} catch (Exception e) {
+				throw new Exception("Erro ao tentar salvar url em usuário", e);
+			}
+
+		}
+		return u;
+
+	}
+	
+	
+	
+	
 	private void updateData(Usuario newObj, Usuario obj) {
 		newObj.setLogin(obj.getLogin());
 		newObj.setSenha(obj.getSenha());

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,8 +28,7 @@ public class Usuario implements Serializable {
 	private Integer id;
 	private String login;
 	private String senha;
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Url> urls = new ArrayList<Url>();
 
 	public Usuario() {
@@ -42,12 +42,11 @@ public class Usuario implements Serializable {
 		this.urls = u.urls;
 	}
 
-	public Usuario(Integer id, String login, String senha, ArrayList<Url> urls) {
+	public Usuario(Integer id, String login, String senha) {
 
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
-		this.urls = urls;
 	}
 
 	public Integer getId() {
@@ -84,7 +83,7 @@ public class Usuario implements Serializable {
 
 	public void adicionaUrl(Url u) {
 		this.getUrls().add(u);
-		u.setUser(this);
+		//u.setUser(this);
 	}
 
 	@Override
