@@ -51,7 +51,7 @@ public class DBService {
 
 		usuario2.getUrls().addAll(Arrays.asList(url5));
 
-		// usuarioService.insert(usuario1);
+		 //usuarioService.insert(usuario1);
 		// usuarioService.insert(usuario2);
 		EncurtadorURL en = new EncurtadorURL();
 		String urlGrande = "https://web.digitalinnovation.one/course/introducao-ao-angular-8/learning/560cfdec-19cc-43ce-b2d1-b53cdd4d9b1a?back=/track/capgemini-fullstack-java-and-angular";
