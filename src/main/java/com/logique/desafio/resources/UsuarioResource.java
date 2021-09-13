@@ -56,15 +56,6 @@ public class UsuarioResource {
 
 	}
 
-//	@CrossOrigin("*")
-//	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-//	public ResponseEntity<Void> update(@Valid @RequestBody Usuario usuario, @PathVariable Integer id) {
-//
-//		Usuario obj = usuarioService.insert(usuario);
-//		obj.setId(id);
-//		obj = usuarioService.update(obj);
-//		return ResponseEntity.noContent().build();
-//	}
 
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -90,26 +81,5 @@ String urlOriginal=usuario.getUrls().get( usuario.getUrls().size()-1).getUrl();
 		return ResponseEntity.status(HttpStatus.CREATED).body(obj);
 
 	}
-//	@CrossOrigin("*")
-//	@RequestMapping(value = "/urls/{id}", method = RequestMethod.PUT)
-//	public ResponseEntity<Void> AdicionaUrl( @Valid @RequestBody Usuario usuario, Url u) {
-// 
-//		Usuario objNovo = usuarioService.find(usuario.getId());
-//		
-//		objNovo.setId(usuario.getId());
-//		objNovo.setLogin(usuario.getLogin());
-//		ArrayList <Url>urls=(ArrayList<Url>) usuario.getUrls();
-//		urls.add(u);
-//		objNovo.setUrls(urls);
-//		objNovo.adicionaUrl(u);
-//
-//		try {
-//			usuarioService.encurtarUrl(objNovo, u.getUrl());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return ResponseEntity.noContent().build();
-//	}
-//	
+
 }

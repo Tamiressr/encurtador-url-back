@@ -35,7 +35,7 @@ public class Url implements Serializable {
 
 	}
 
-	public Url(Integer id, Date data, Usuario user, String url, String urlEncurtada) {
+	public Url(Integer id, Date data, String url, String urlEncurtada) {
 		super();
 		this.id = id;
 		this.data = data;

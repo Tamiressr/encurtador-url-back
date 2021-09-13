@@ -14,6 +14,5 @@ import com.logique.desafio.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-	@Query(value="SELECT u.* FROM  url u, usuario_urls uu  where uu.urls_id=u.id  and uu.usuario_id=:id",nativeQuery=true )
-	public ArrayList<Url> returnUrls(@Param("id") int id);
+
 }

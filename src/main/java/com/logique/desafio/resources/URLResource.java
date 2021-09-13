@@ -23,7 +23,7 @@ public class URLResource {
 	@Autowired
 	private URLService urlService;
 
-	// busca a url pelo id e retorna seus dados
+	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Url> find(@PathVariable Integer id) {

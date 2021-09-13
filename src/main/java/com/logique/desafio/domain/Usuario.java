@@ -12,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "usuario")
@@ -26,7 +28,9 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotNull
 	private String login;
+	@NotNull
 	private String senha;
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Url> urls = new ArrayList<Url>();

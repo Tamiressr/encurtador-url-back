@@ -88,11 +88,9 @@ public class UsuarioService {
 			try {
 				u.setUrlEncurtada(EncurtadorURL.convertToShortUrl(url));
 				u.setUrl(url);
-			//	u.setUser(user);
 				u.setData(new Date());
 				user.adicionaUrl(u);
 				usuarioRepository.save(user);
-				//urlRepository.save(u);
 			} catch (Exception e) {
 				throw new Exception("Erro ao tentar salvar url em usuário", e);
 			}
@@ -110,11 +108,7 @@ public Url shortUrl(String url) throws Exception {
 			try {
 				u.setUrlEncurtada(EncurtadorURL.convertToShortUrl(url));
 				u.setUrl(url);
-			//	u.setUser(user);
 				u.setData(new Date());
-				//user.adicionaUrl(u);
-				//usuarioRepository.save(user);
-				//urlRepository.save(u);
 			} catch (Exception e) {
 				throw new Exception("Erro ao tentar salvar url em usuário", e);
 			}
